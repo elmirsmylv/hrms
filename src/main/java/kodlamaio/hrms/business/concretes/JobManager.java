@@ -2,7 +2,7 @@ package kodlamaio.hrms.business.concretes;
 
 import kodlamaio.hrms.business.abstracts.JobService;
 import kodlamaio.hrms.dataAccess.abstracts.JobDao;
-import kodlamaio.hrms.entities.concretes.Job;
+import kodlamaio.hrms.entities.concretes.JobTitles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ public class JobManager implements JobService {
         this.jobDao = jobDao;
     }
 
-    public List<Job> getAll(){
+    public List<JobTitles> getAll(){
         return this.jobDao.findAll() ;
     }
 }
