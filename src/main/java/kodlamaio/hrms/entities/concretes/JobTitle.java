@@ -12,9 +12,10 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="job_titles")
-public class JobTitles implements Entities {
+@PrimaryKeyJoinColumn(name="id")
+public class JobTitle {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private int id;
 

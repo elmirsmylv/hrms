@@ -1,9 +1,7 @@
 package kodlamaio.hrms.entities.concretes;
 
-import kodlamaio.hrms.entities.abstracts.Entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -13,7 +11,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="job_seekers")
 @PrimaryKeyJoinColumn(name = "id")
-public class JobSeekers extends Users {
+public class JobSeeker extends User {
 
 
     @Id
@@ -30,6 +28,6 @@ public class JobSeekers extends Users {
     private long nationalityId;
 
     @Column(name="birth_date")
-    private int birthDate;
+    private Integer birthDate;
 
 }
