@@ -4,4 +4,5 @@ import kodlamaio.hrms.entities.concretes.JobSeeker;
 
 public interface VerificationService {
     boolean checkIfRealPerson(JobSeeker jobSeeker);
+    boolean domainControl(String email, String website);
 }

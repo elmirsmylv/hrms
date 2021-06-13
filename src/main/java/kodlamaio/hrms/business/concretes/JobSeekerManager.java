@@ -6,6 +6,8 @@ import kodlamaio.hrms.core.utilities.results.*;
 import kodlamaio.hrms.dataAccess.abstracts.JobSeekersDao;
 import kodlamaio.hrms.entities.concretes.JobSeeker;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,12 +17,14 @@ public class JobSeekerManager implements JobSeekerService {
 
     private JobSeekersDao jobSeekersDao;
     private VerificationService verificationService;
+    PasswordEncoder passwordEncoder;
 
     @Autowired
     public JobSeekerManager(JobSeekersDao jobSeekersDao, VerificationService verificationService) {
         super();
         this.jobSeekersDao = jobSeekersDao;
         this.verificationService = verificationService;
+        this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
 
@@ -36,6 +40,7 @@ public class JobSeekerManager implements JobSeekerService {
         else if(verificationService.checkIfRealPerson(jobSeeker) != true){
             return new ErrorResult("Invalid person");
         }else{
+            jobSeeker.setPassword(this.passwordEncoder.encode(jobSeeker.getPassword()));
             this.jobSeekersDao.save(jobSeeker);
             return new SuccessResult("User added!");
         }
