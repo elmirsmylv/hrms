@@ -1,13 +1,11 @@
 package kodlamaio.hrms.business.concretes;
 
 import kodlamaio.hrms.business.abstracts.JobAdvertisementService;
-import kodlamaio.hrms.core.utilities.results.DataResult;
-import kodlamaio.hrms.core.utilities.results.Results;
-import kodlamaio.hrms.core.utilities.results.SuccessDataResults;
-import kodlamaio.hrms.core.utilities.results.SuccessResult;
+import kodlamaio.hrms.core.utilities.results.*;
 import kodlamaio.hrms.dataAccess.abstracts.JobAdvertisementDao;
 import kodlamaio.hrms.entities.concretes.JobAdvertisement;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,7 +32,24 @@ public class JobAdvertisementManager implements JobAdvertisementService {
         return new SuccessDataResults<List<JobAdvertisement>>(this.jobAdvertisementDao.findAll(),"Data listed");
     }
 
+    @Override
+    public DataResult<List<JobAdvertisement>> getAllSortedByDate() {
+        Sort sort = Sort.by(Sort.Direction.DESC,"createdAt");
+        return new SuccessDataResults<List<JobAdvertisement>>(this.jobAdvertisementDao.findAll(sort), "Sorted by date ASC");
+    }
+
     public DataResult<List<JobAdvertisement>> getActiveAdverts(){
         return new SuccessDataResults<List<JobAdvertisement>>(this.jobAdvertisementDao.getByActive(true),"Active adverts listed");
     }
+
+    @Override
+    public DataResult<List<JobAdvertisement>> getByIdAndCompanyId(int jobAdvertId, int companyId) {
+        return new SuccessDataResults<List<JobAdvertisement>>(this.jobAdvertisementDao.getByIdAndCompany_Id(jobAdvertId,companyId),"Data listed");
+    }
+
+    @Override
+    public DataResult<List<JobAdvertisement>> getByCompanyIdAndActive(int companyId,boolean active) {
+        return new SuccessDataResults<List<JobAdvertisement>>(this.jobAdvertisementDao.getByCompany_IdAndActive(companyId,active),"Listed by company");
+    }
+
 }

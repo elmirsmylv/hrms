@@ -45,4 +45,14 @@ public class CompanyManager implements CompanyService {
     public DataResult<List<Company>> getAll() {
         return new SuccessDataResults<List<Company>>(this.companyDao.findAll(), "Data listed");
     }
+
+    @Override
+    public DataResult<Company> getById(int companyId) {
+        return new SuccessDataResults<Company>(this.companyDao.getById(companyId), "data listed");
+    }
+
+    @Override
+    public DataResult<Company> getByIdAndJobAdvertisements_Id(int companyId, int jobAdvertId) {
+        return new SuccessDataResults<Company>(this.companyDao.getByIdAndJobAdvertisements_Id(companyId,jobAdvertId), "Data listed");
+    }
 }

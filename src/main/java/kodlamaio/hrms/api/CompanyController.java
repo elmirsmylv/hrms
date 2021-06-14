@@ -29,5 +29,15 @@ public class CompanyController {
         return this.companyService.add(company);
     }
 
+    @GetMapping("get_by_id")
+    public DataResult<Company> getById(@RequestParam int companyId){
+        return this.companyService.getById(companyId);
+    }
+
+    @GetMapping("get_by_id_and_job_advert")
+    public DataResult<Company> getByIdAndJobAdvertId(@RequestParam int companyId, int jobAdvertId){
+        return this.companyService.getByIdAndJobAdvertisements_Id(companyId,jobAdvertId);
+    }
+
 
 }

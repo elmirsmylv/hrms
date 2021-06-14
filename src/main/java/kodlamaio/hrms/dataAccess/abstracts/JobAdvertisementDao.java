@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement,Integer> {
     List<JobAdvertisement> getByActive(boolean status);
+    List<JobAdvertisement> getByIdAndCompany_Id(int jobAdvertId, int companyId);
+    List<JobAdvertisement> getByCompany_IdAndActive(int companyId,boolean active);
 }
